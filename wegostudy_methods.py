@@ -24,7 +24,30 @@ def setUp():
     else:
         print(f'{locators.app} did not launch. check your code or application')
         print(f'Current URL: {driver.current_url}, Page title: {driver.title}')
-
+        
+#------ [LOG_IN Script ] WH-------------------------------------------------------
+def log_in(useremail, password):
+    print(f'*---[Process Positive Log In]---------------------------------------------------------')
+    print(useremail == locators.login_email)
+    print(password == locators.login_password)
+    if (useremail == locators.login_email and password == locators.login_password):
+        driver.find_element(By.XPATH, '//button[contains(text(),"LOGIN")]').click()
+        #driver.find_element(By.NAME, 'LOGIN').click()
+        sleep(2)
+        print(f'*--[LOG IN PAGES]--------------------------------------------------------------*')
+        print(f'## Login page is displayed! please Continue.')
+        sleep(1)
+        driver.find_element(By.ID, 'user_email').send_keys(useremail)
+        sleep(0.5)
+        driver.find_element(By.ID, 'user_password').send_keys(password)
+        sleep(0.5)
+        driver.find_element(By.XPATH,'//button[contains(text(),"SIGN IN")]').click()
+        sleep(0.5)
+        print(f'{locators.app}  Login is successful. {datetime.datetime.now()} ')
+        print("")
+    else:
+        print(f' There is something wrong with login. please check again ')
+#-----------------------------------------------------------------------------------------------------
 
 def tearDown():
     if driver is not None:
